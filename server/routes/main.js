@@ -12,5 +12,10 @@ router.get("/test", (req, res) => {
 
 router.get('/test2', (req,res)=> {
     res.send('this is test 2')
-})
+}) 
+   
+router.get('/test3', (req,res)=> {
+    res.send('this is test 3')
+}) 
+
 export default router;
