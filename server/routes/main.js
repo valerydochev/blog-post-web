@@ -10,4 +10,7 @@ router.get("/test", (req, res) => {
     res.send('test')
 })
 
+router.get('/test2', (req,res)=> {
+    res.send('this is test 2')
+})
 export default router;
