@@ -6,6 +6,7 @@ import expressLayout from "express-ejs-layouts";
 const app = express();
 const PORT = process.env.PORT;
 
+
 app.use(express.static("public"));
 
 
