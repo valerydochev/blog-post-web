@@ -13,14 +13,10 @@ router.get("", (req, res) => {
  
 router.get("/about", (req, res) => {
     res.render('about')
-})
+});
 
-router.get('/test2', (req,res)=> {
-    res.send('this is test 2')
-}) 
-   
-router.get('/test3', (req,res)=> {
-    res.send('this is test 3')
-}) 
+router.get("/contact", (req, res) => {
+    res.render('contact')
+});
 
 export default router;
