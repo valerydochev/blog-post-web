@@ -318,7 +318,7 @@ img {
   border: 0;
 }
 
-#searchClose {
+.searchClose {
   position: absolute;
   top: 0;
   right: 0;
