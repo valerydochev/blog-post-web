@@ -33,6 +33,26 @@ router.get("", async (req, res) => {
     }
 
 });
+     
+router.get("/post/:id", async (req, res) => {
+
+    try{
+        const locals = {
+            title: "NodeJs Blog",
+            description: "Blog page created with NodeJs, Express & MongoDb."
+        }; 
+          
+        let currentPost = req.params.id;
+          
+        const data = await Post.findById({_id: currentPost});
+        res.render("post", {locals, data});
+
+    } catch (error) {
+        console.log(error);
+    }
+
+});
+
 
   
 
