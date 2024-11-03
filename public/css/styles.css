@@ -319,12 +319,20 @@ img {
 }
 
 .searchClose {
+  background: none;
+  border: none;
+  color: var(--gray-light);
+  font-size: 1rem;
+  cursor: pointer;
   position: absolute;
   top: 0;
   right: 0;
-  color: var(--gray-light);
   padding: 15px;
 }
+.searchClose:hover {
+  color: var(--black);
+}
+
 
 
 .pagination {
