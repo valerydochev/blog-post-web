@@ -3,6 +3,7 @@ import express from "express";
 import router  from "./server/routes/main.js";
 import expressLayout from "express-ejs-layouts";
 import connectDB from "./server/config/db.js"; 
+import adminRouter from "./server/routes/admin.js";
 
 const app = express();
 const PORT = process.env.PORT;
@@ -21,6 +22,7 @@ app.set("view engine", "ejs");
 
 
 app.use("/", router);
+app.use("/", adminRouter);
 
 
 app.listen(PORT, () => {
