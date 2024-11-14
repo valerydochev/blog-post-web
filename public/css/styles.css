@@ -333,8 +333,6 @@ img {
   color: var(--black);
 }
 
-
-
 .pagination {
   font-size: 1.3rem;
   color: var(--gray);
@@ -346,3 +344,28 @@ img {
 .pagination:hover {
   color: var(--black);
 }
+   
+.password-container {
+  position: relative;
+}  
+  
+.password.container {
+  position: relative;
+}
+  
+.toggle-password {
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+}
+  
+.toggle-password:hover {
+  color: #7E7E7E;
+}
+  
+input[type="password"] {
+  padding-right: 40px; 
+}
+

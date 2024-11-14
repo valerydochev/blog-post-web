@@ -1,6 +1,10 @@
 import express from "express";
 import Post from "../modules/Post.js"; 
 import User from "../modules/User.js"; 
+import router from "./main.js";
+import bcrypt from 'bcrypt';
+import jwt from "jsonwebtoken";
+
   
 const adminRouter = express.Router();
   
@@ -37,9 +41,33 @@ adminRouter.post("/admin", async (req, res) => {
     } catch (error) {
         console.log(error);
     }
-
 });
-    
   
-  
+router.post("/register", async(req, res) => {
+    try{
+
+        const {username, password} = req.body
+          
+        if (!username || !password) {
+            return res.status(400).json({ message: "Username and password are required" });
+        }
+          
+        const saltRounds = 10;
+        const hashedPassword = await bcrypt.hash(password, saltRounds);
+          
+        const newUser = new User({
+            username: username,
+            password: hashedPassword
+        });
+          
+        await newUser.save();
+          
+        res.status(201).json({message: "Usser registarted successfully"});
+
+    }catch(error){
+        console.log(error);
+        res.status(500).json({message: "An error occurred during registration"});
+    }
+})
+     
 export default adminRouter;
