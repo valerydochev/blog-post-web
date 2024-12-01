@@ -26,6 +26,10 @@ adminRouter.get("/admin", async (req, res) => {
 
 });
   
+router.get("/dashboard", async (req, res) => {
+    res.render("admin/dashboard");
+})
+  
 adminRouter.post("/admin", async (req, res) => {
 
     try{
@@ -69,5 +73,6 @@ router.post("/register", async(req, res) => {
         res.status(500).json({message: "An error occurred during registration"});
     }
 })
+  
      
 export default adminRouter;
