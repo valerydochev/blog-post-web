@@ -44,12 +44,68 @@ adminRouter.get("/admin", async (req, res) => {
   
 adminRouter.get("/dashboard", authenticateToken, async (req, res) => {
     try {
-        res.render("admin/dashboard", { layout: adminLayout });
+           
+        const locals = {
+            title: "Dashboard",
+            description: "Blog page created with NodeJs, Express & MongoDb."
+        }; 
+
+        const data = await Post.find();
+        res.render("admin/dashboard", { 
+            locals,
+            data,
+            layout: adminLayout 
+        });
     } catch (error) {
         console.log(error);
     }
 });
-    
+  
+adminRouter.get("/add-post", authenticateToken, async (req, res) => {
+    try {
+           
+        const locals = {
+            title: "Add Post",
+            description: "Blog page created with NodeJs, Express & MongoDb."
+        }; 
+
+        const data = await Post.find();
+        res.render("admin/add-post", { 
+            locals,
+            layout: adminLayout
+        });
+    } catch (error) {
+        console.log(error);
+    }
+});  
+  
+adminRouter.post("/add-post", authenticateToken, async (req, res) => {
+    try { 
+        try {
+              
+            const { title, body } = req.body;
+              
+            if (!title || !body) {
+                console.log("Validation failed: Missing title or body.");
+                return res.status(400).json({ message: "Title and body are required" });
+            }
+
+            const newPost = new Post({
+                title: req.body.title,
+                body: req.body.body
+            });
+              
+            await Post.create(newPost);
+            res.redirect("/dashboard")
+            
+        } catch (error) {
+            console.log(error);         
+        }
+    } catch (error) {
+        console.log(error);
+    }
+});  
+
 adminRouter.post("/admin", async (req, res) => {
     try {
         const { username, password } = req.body;
