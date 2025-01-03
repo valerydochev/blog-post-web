@@ -106,6 +106,44 @@ adminRouter.post("/add-post", authenticateToken, async (req, res) => {
     }
 });  
 
+adminRouter.put("/edit-post/:id", authenticateToken, async (req, res) => {
+    try {
+
+        await Post.findByIdAndUpdate(req.params.id, {
+            title: req.body.title,
+            body: req.body.body,
+            updatedAt: Date.now()
+        });
+          
+        res.redirect(`/edit-post/${req.params.id}`);
+
+    }catch {
+        console.log(error);
+    }
+});
+
+
+adminRouter.get("/edit-post/:id", authenticateToken, async (req, res) => {
+    try {
+
+        const locals = {
+            title: "Edit Post",
+            description: "Free NodeJs User Management System"
+        }; 
+
+        const data = await Post.findOne({_id: req.params.id});
+          
+        res.render("admin/edit-post", {
+            locals,
+            data,
+            layout: adminLayout
+        });
+
+    }catch {
+        console.log(error);
+    }
+});
+
 adminRouter.post("/admin", async (req, res) => {
     try {
         const { username, password } = req.body;
@@ -162,5 +200,19 @@ adminRouter.post("/register", async (req, res) => {
         res.status(500).json({ message: "An error occurred during registration" });
     }
 });     
+    
+router.delete("/delete-post/:id", authenticateToken, async (req, res) =>{
+    try {
+        await Post.deleteOne({_id: req.params.id})
+        res.redirect("/dashboard");
+    } catch (error) {
+        console.log(error);
+    }
+})
+  
+router.get("/logout", (req, res) => {
+    res.clearCookie("token");
+    res.redirect('/');
+});
 
 export default adminRouter;

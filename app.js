@@ -2,6 +2,7 @@ import "dotenv/config";
 import express from "express";
 import router  from "./server/routes/main.js";
 import expressLayout from "express-ejs-layouts";
+import methodOverride from "method-override";
 import connectDB from "./server/config/db.js"; 
 import adminRouter from "./server/routes/admin.js";
 import cookieParser from "cookie-parser";
@@ -17,6 +18,7 @@ app.use(express.urlencoded({extended: true}));
 app.use(express.json());
 app.use(express.json());
 app.use(cookieParser());
+app.use(methodOverride("_method"));
   
 app.use(session({
     secret: "thisismysecretkey",
